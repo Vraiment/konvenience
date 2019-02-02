@@ -138,5 +138,65 @@ namespace Konvenience.Tests
                 .Should()
                 .Throw<ArgumentNullException>();
         }
+
+        [Test]
+        public void Test_TakeValueIf_With_A_True_Predicate()
+        {
+            var value = 1;
+
+            var result = value.TakeValueIf(v => true);
+
+            result.Should().Be(value);
+        }
+
+        [Test]
+        public void Test_TakeValueIf_With_A_False_Predicate()
+        {
+            var value = 1;
+
+            var result = value.TakeValueIf(v => false);
+
+            result.Should().BeNull();
+        }
+
+        [Test]
+        public void Test_TakeValueIf_With_A_Null_Predicate()
+        {
+            var value = 1;
+
+            value.Invoking(v => v.TakeValueIf(null))
+                .Should()
+                .Throw<ArgumentNullException>();
+        }
+
+        [Test]
+        public void Test_TakeValueUnless_With_A_True_Predicate()
+        {
+            var value = 1;
+
+            var result = value.TakeValueUnless(v => true);
+
+            result.Should().BeNull();
+        }
+
+        [Test]
+        public void Test_TakeValueUnless_With_A_False_Predicate()
+        {
+            var value = 1;
+
+            var result = value.TakeValueUnless(v => false);
+
+            result.Should().Be(value);
+        }
+
+        [Test]
+        public void Test_TakeValueUnless_With_A_Null_Predicate()
+        {
+            var value = 1;
+
+            value.Invoking(v => v.TakeValueUnless(null))
+                .Should()
+                .Throw<ArgumentNullException>();
+        }
     }
 }
