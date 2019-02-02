@@ -37,7 +37,13 @@ namespace Konvenience
         /// 
         /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
         public static T Also<T>(this T obj, Action<T> action)
-            => throw new NotImplementedException();
+        {
+            AssertArgumentNotNull(action, "action");
+
+            action(obj);
+
+            return obj;
+        }
 
         /// <summary>
         /// Returns the result of executing the function with the input action.
@@ -53,7 +59,11 @@ namespace Konvenience
         /// 
         /// <exception cref="ArgumentNullException">If <paramref name="function"/> is null.</exception>
         public static TResult Let<T, TResult>(this T obj, Func<T, TResult> function)
-            => throw new NotImplementedException();
+        {
+            AssertArgumentNotNull(function, "function");
+
+            return function(obj);
+        }
 
         /// <summary>
         /// Returns the input object if the predicate is true for that object, null otherwise.
@@ -78,7 +88,16 @@ namespace Konvenience
         /// 
         /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
         public static T TakeReferenceIf<T>(this T obj, Predicate<T> predicate) where T : class
-            => throw new NotImplementedException();
+        {
+            AssertArgumentNotNull(predicate, "predicate");
+
+            if (!predicate(obj))
+            {
+                return null;
+            }
+
+            return obj;
+        }
 
         /// <summary>
         /// Returns the input object if the predicate is false for that object, null otherwise.
@@ -95,7 +114,16 @@ namespace Konvenience
         /// 
         /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
         public static T TakeReferenceUnless<T>(this T obj, Predicate<T> predicate) where T : class
-            => throw new NotImplementedException();
+        {
+            AssertArgumentNotNull(predicate, "predicate");
+
+            if (predicate(obj))
+            {
+                return null;
+            }
+
+            return obj;
+        }
 
         /// <summary>
         /// Returns the input object if the predicate is true for that object, null otherwise.
@@ -112,7 +140,16 @@ namespace Konvenience
         /// 
         /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
         public static T? TakeValueIf<T>(this T obj, Predicate<T> predicate) where T : struct
-            => throw new NotImplementedException();
+        {
+            AssertArgumentNotNull(predicate, "predicate");
+
+            if (!predicate(obj))
+            {
+                return null;
+            }
+
+            return obj;
+        }
 
         /// <summary>
         /// Returns the input object if the predicate is false for that object, null otherwise.
@@ -129,6 +166,23 @@ namespace Konvenience
         /// 
         /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
         public static T? TakeValueUnless<T>(this T obj, Predicate<T> predicate) where T : struct
-            => throw new NotImplementedException();
+        {
+            AssertArgumentNotNull(predicate, "predicate");
+
+            if (predicate(obj))
+            {
+                return null;
+            }
+
+            return obj;
+        }
+
+        private static void AssertArgumentNotNull(object argument, string argumentName)
+        {
+            if (argument is null)
+            {
+                throw new ArgumentNullException(argumentName);
+            }
+        }
     }
 }
