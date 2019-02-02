@@ -78,5 +78,35 @@ namespace Konvenience.Tests
                 .Should()
                 .Throw<ArgumentNullException>();
         }
+
+        [Test]
+        public void Test_TakeReferenceIf_With_A_True_Predicate()
+        {
+            var value = "asdf";
+
+            var result = value.TakeReferenceIf(v => true);
+
+            result.Should().BeSameAs(value);
+        }
+
+        [Test]
+        public void Test_TakeReferenceIf_With_A_False_Predicate()
+        {
+            var value = "asdf";
+
+            var result = value.TakeReferenceIf(v => false);
+
+            result.Should().BeNull();
+        }
+
+        [Test]
+        public void Test_TakeReferenceIf_With_A_Null_Predicate()
+        {
+            var value = "asdf";
+
+            value.Invoking(v => v.TakeReferenceIf(null))
+                .Should()
+                .Throw<ArgumentNullException>();
+        }
     }
 }
