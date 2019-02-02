@@ -37,5 +37,46 @@ namespace Konvenience.Tests
                 .Should()
                 .Throw<ArgumentNullException>();
         }
+
+        [Test]
+        public void Test_Using_Let_In_An_Object()
+        {
+            var dummy = new DummyClass();
+            var expected = "asdf";
+
+            var result = dummy.Let(d =>
+            {
+                d.Should().BeSameAs(dummy);
+                return expected;
+            });
+
+            result.Should().BeSameAs(expected);
+        }
+
+        [Test]
+        public void Test_Using_Let_With_A_Null_Object()
+        {
+            string value = null;
+            var expected = "asdf";
+
+            var result = value.Let(v =>
+            {
+                v.Should().BeNull();
+                return expected;
+            });
+
+            result.Should().BeSameAs(expected);
+        }
+
+        [Test]
+        public void Test_Using_Let_With_A_Null_Function()
+        {
+            var dummy = new DummyClass();
+            Func<DummyClass, object> function = null;
+
+            dummy.Invoking(d => d.Let(function))
+                .Should()
+                .Throw<ArgumentNullException>();
+        }
     }
 }
