@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
-        <id>Vraiment.Konvenience</id>
+        <id>Konvenience</id>
         <version>1.0.0</version>
         <authors>Vraiment</authors>
         <owners>vraiment</owners>
         <projectUrl>https://github.com/Vraiment/konvenience</projectUrl>
-        <licenseUrl>https://github.com/Vraiment/konvenience/blob/master/LICENSE</licenseUrl>
+        <license type="expression">MIT</license>
         <description>Kotlin like extension methods for C#.</description>
     </metadata>
     <files>
