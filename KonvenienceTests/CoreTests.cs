@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Konvenience.Tests
+namespace Konvenience
 {
     class CoreTests
     {

@@ -1,4 +1,4 @@
-﻿namespace Konvenience.Tests
+﻿namespace Konvenience
 {
     public class DummyClass
     {

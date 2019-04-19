@@ -8,7 +8,7 @@
     <ProjectGuid>{16148538-1608-4650-A7E1-E182E95CC777}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KonvenienceTests</RootNamespace>
+    <RootNamespace>Konvenience</RootNamespace>
     <AssemblyName>KonvenienceTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
