@@ -38,7 +38,7 @@ namespace Konvenience
         /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
         public static T Also<T>(this T obj, Action<T> action)
         {
-            AssertArgumentNotNull(action, "action");
+            Validate.ArgumentNotNull(action, nameof(action));
 
             action(obj);
 
@@ -60,7 +60,7 @@ namespace Konvenience
         /// <exception cref="ArgumentNullException">If <paramref name="function"/> is null.</exception>
         public static TResult Let<T, TResult>(this T obj, Func<T, TResult> function)
         {
-            AssertArgumentNotNull(function, "function");
+            Validate.ArgumentNotNull(function, nameof(function));
 
             return function(obj);
         }
@@ -89,7 +89,7 @@ namespace Konvenience
         /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
         public static T TakeReferenceIf<T>(this T obj, Predicate<T> predicate) where T : class
         {
-            AssertArgumentNotNull(predicate, "predicate");
+            Validate.ArgumentNotNull(predicate, nameof(predicate));
 
             if (!predicate(obj))
             {
@@ -115,7 +115,7 @@ namespace Konvenience
         /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
         public static T TakeReferenceUnless<T>(this T obj, Predicate<T> predicate) where T : class
         {
-            AssertArgumentNotNull(predicate, "predicate");
+            Validate.ArgumentNotNull(predicate, nameof(predicate));
 
             if (predicate(obj))
             {
@@ -141,7 +141,7 @@ namespace Konvenience
         /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
         public static T? TakeValueIf<T>(this T obj, Predicate<T> predicate) where T : struct
         {
-            AssertArgumentNotNull(predicate, "predicate");
+            Validate.ArgumentNotNull(predicate, nameof(predicate));
 
             if (!predicate(obj))
             {
@@ -167,7 +167,7 @@ namespace Konvenience
         /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
         public static T? TakeValueUnless<T>(this T obj, Predicate<T> predicate) where T : struct
         {
-            AssertArgumentNotNull(predicate, "predicate");
+            Validate.ArgumentNotNull(predicate, nameof(predicate));
 
             if (predicate(obj))
             {
@@ -175,14 +175,6 @@ namespace Konvenience
             }
 
             return obj;
-        }
-
-        private static void AssertArgumentNotNull(object argument, string argumentName)
-        {
-            if (argument is null)
-            {
-                throw new ArgumentNullException(argumentName);
-            }
         }
     }
 }
