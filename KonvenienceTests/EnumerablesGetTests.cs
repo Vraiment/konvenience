@@ -280,5 +280,94 @@ namespace Konvenience
             .Should()
             .Be('z');
         #endregion
+
+        #region Get with IReadOnlyList<T> tests
+        [Test]
+        public void Test_Get_A_Valid_Index_In_An_IReadOnlyList()
+        {
+            IReadOnlyList<char> list = NonEmptyList();
+            int index = 0;
+
+            list.Get(index)
+                .Should()
+                .Be(list[index]);
+        }
+
+        [Test]
+        public void Test_Get_An_Invalid_Index_In_An_IReadOnlyList()
+        {
+            IReadOnlyList<char> list = NonEmptyList();
+
+            list
+                .Invoking(a => a.Get(-1))
+                .Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .Where(e => e.Message.Contains("index"));
+        }
+
+        [Test]
+        public void Test_Get_In_A_Null_IReadOnlyList() => Null
+            .As<IReadOnlyList<char>>()
+            .Invoking(n => n.Get(0))
+            .Should()
+            .Throw<ArgumentNullException>()
+            .Where(e => e.Message.Contains("list"));
+
+        [Test]
+        public void Test_GetOrElse_A_Valid_Index_In_An_IReadOnlyList()
+        {
+            IReadOnlyList<char> list = NonEmptyList();
+            int index = 0;
+
+            list.GetOrElse(index, 'z')
+                .Should()
+                .Be(list[index]);
+        }
+
+        [Test]
+        public void Test_GetOrElse_An_Invalid_Index_In_An_IReadOnlyList()
+        {
+            IReadOnlyList<char> list = NonEmptyList();
+
+            list.GetOrElse(-1, 'z')
+                .Should()
+                .Be('z');
+        }
+
+        [Test]
+        public void Test_GetOrElse_In_A_Null_IReadOnlyList() => Null
+            .As<IReadOnlyList<char>>()
+            .GetOrElse(0, 'z')
+            .Should()
+            .Be('z');
+
+        [Test]
+        public void Test_GetOrElse_With_A_Function_A_Valid_Index_In_An_IReadOnlyList()
+        {
+            IReadOnlyList<char> list = NonEmptyList();
+            int index = 0;
+
+            list.GetOrElse(index, () => 'z')
+                .Should()
+                .Be(list[index]);
+        }
+
+        [Test]
+        public void Test_GetOrElse_With_A_Function_An_Invalid_Index_In_An_IReadOnlyList()
+        {
+            IReadOnlyList<char> list = NonEmptyList();
+
+            list.GetOrElse(-1, () => 'z')
+                .Should()
+                .Be('z');
+        }
+
+        [Test]
+        public void Test_GetOrElse_With_A_Function_In_A_Null_IReadOnlyList() => Null
+            .As<IReadOnlyList<char>>()
+            .GetOrElse(0, () => 'z')
+            .Should()
+            .Be('z');
+        #endregion
     }
 }
