@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace Konvenience
 {
@@ -93,6 +94,96 @@ namespace Konvenience
         [Test]
         public void Test_GetOrElse_With_A_Function_In_A_Null_Array() => Null
             .As<char[]>()
+            .GetOrElse(0, () => 'z')
+            .Should()
+            .Be('z');
+        #endregion
+
+        #region Get with IEnumerable<T> tests
+        [Test]
+        public void Test_Get_A_Valid_Index_In_An_IEnumerable()
+        {
+            char[] array = NonEmptyArray();
+            IEnumerable<char> enumerable = Enumerable.For(array);
+            int index = 0;
+
+            enumerable.Get(index)
+                .Should()
+                .Be(array[index]);
+        }
+
+        [Test]
+        public void Test_Get_An_Invalid_Index_In_An_IEnumerable()
+            => Enumerable.For<char>()
+                .Invoking(a => a.Get(-1))
+                .Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .Where(e => e.Message.Contains("index"));
+
+        [Test]
+        public void Test_Get_In_A_Null_IEnumerable() => Null
+            .As<IEnumerable<char>>()
+            .Invoking(n => n.Get(0))
+            .Should()
+            .Throw<ArgumentNullException>()
+            .Where(e => e.Message.Contains("enumerable"));
+
+        [Test]
+        public void Test_GetOrElse_A_Valid_Index_In_An_IEnumerable()
+        {
+            char[] array = NonEmptyArray();
+            IEnumerable<char> enumerable = Enumerable.For(array);
+            int index = 0;
+
+            enumerable.GetOrElse(index, 'z')
+                .Should()
+                .Be(array[index]);
+        }
+
+        [Test]
+        public void Test_GetOrElse_An_Invalid_Index_In_An_IEnumerable()
+        {
+            char[] array = NonEmptyArray();
+            IEnumerable<char> enumerable = Enumerable.For(array);
+
+            enumerable.GetOrElse(-1, 'z')
+                .Should()
+                .Be('z');
+        }
+
+        [Test]
+        public void Test_GetOrElse_In_A_Null_IEnumerable() => Null
+            .As<IEnumerable<char>>()
+            .GetOrElse(0, 'z')
+            .Should()
+            .Be('z');
+
+        [Test]
+        public void Test_GetOrElse_With_A_Function_A_Valid_Index_In_An_IEnumerable()
+        {
+            char[] array = NonEmptyArray();
+            IEnumerable<char> enumerable = Enumerable.For(array);
+            int index = 0;
+
+            enumerable.GetOrElse(index, () => 'z')
+                .Should()
+                .Be(array[index]);
+        }
+
+        [Test]
+        public void Test_GetOrElse_With_A_Function_An_Invalid_Index_In_An_IEnumerable()
+        {
+            char[] array = NonEmptyArray();
+            IEnumerable<char> enumerable = Enumerable.For(array);
+
+            enumerable.GetOrElse(-1, () => 'z')
+                .Should()
+                .Be('z');
+        }
+
+        [Test]
+        public void Test_GetOrElse_With_A_Function_In_A_Null_IEnumerable() => Null
+            .As<IEnumerable<char>>()
             .GetOrElse(0, () => 'z')
             .Should()
             .Be('z');
