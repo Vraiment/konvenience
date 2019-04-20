@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.com/Vraiment/konvenience.svg?branch=master)](https://travis-ci.com/Vraiment/konvenience)
+﻿[![Build Status](https://travis-ci.com/Vraiment/konvenience.svg?branch=master)](https://travis-ci.com/Vraiment/konvenience)
 
-﻿Konvenience
+Konvenience
 -------------
 
 *Konvenience* is a small library aimed to implement a small subset of Kotlin's standard "scope functions".
