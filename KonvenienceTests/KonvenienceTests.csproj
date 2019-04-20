@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumerablesGetTests.cs" />
     <Compile Include="ForEachTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CoreTests.cs" />
