@@ -115,5 +115,59 @@ namespace Konvenience
             }
         }
         #endregion
+
+        #region Dictionaries' ForEach
+        /// <summary>
+        /// Executes <paramref name="action"/> in each entry of <paramref name="dictionary"/>.
+        /// </summary>
+        /// 
+        /// <typeparam name="TKey">The type of the keys for the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values for the dictionary.</typeparam>
+        /// 
+        /// <param name="dictionary">The objects that will be iterated over.</param>
+        /// <param name="action">The action that will be executed for each object.</param>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        public static void ForEach<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, Action<TKey, TValue> action)
+        {
+            Validate.ArgumentNotNull(action, nameof(action));
+
+            if (dictionary is null)
+            {
+                return;
+            }
+
+            foreach (var entry in dictionary)
+            {
+                action(entry.Key, entry.Value);
+            }
+        }
+
+        /// <summary>
+        /// Executes <paramref name="action"/> in each entry of <paramref name="dictionary"/>.
+        /// </summary>
+        /// 
+        /// <typeparam name="TKey">The type of the keys for the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values for the dictionary.</typeparam>
+        /// 
+        /// <param name="dictionary">The objects that will be iterated over.</param>
+        /// <param name="action">The action that will be executed for each object.</param>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        public static void ForEach<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, Action<TKey, TValue> action)
+        {
+            Validate.ArgumentNotNull(action, nameof(action));
+
+            if (dictionary is null)
+            {
+                return;
+            }
+
+            foreach (var entry in dictionary)
+            {
+                action(entry.Key, entry.Value);
+            }
+        }
+        #endregion
     }
 }

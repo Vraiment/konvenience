@@ -114,5 +114,80 @@ namespace Konvenience
                 .Throw<ArgumentNullException>()
                 .Where(e => e.Message.Contains("action"));
         #endregion
+
+        private static Dictionary<string, int> NonEmptyDictionary() => new Dictionary<string, int>
+        {
+            ["one"] = 1,
+            ["two"] = 2,
+            ["three"] = 3
+        };
+
+        #region ForEach with IDictionary<TKey, TValue> tests
+        [Test]
+        public void Test_ForEach_In_An_IDictionary()
+        {
+            IDictionary<string, int> expected = NonEmptyDictionary();
+            Dictionary<string, int> result = new Dictionary<string, int>();
+
+            expected.ForEach((k, v) =>
+            {
+                result.Should().NotContainKey(k, "Duplicate key/value pair iteration");
+                result[k] = v;
+            });
+
+            result.Should().Equal(expected);
+        }
+
+        [Test]
+        public void Test_ForEach_In_A_Null_IDictionary() => Null
+            .As<IDictionary<string, int>>()
+            .ForEach((k, v) => Fail("This should never be executed"));
+
+        [Test]
+        public void Test_ForEach_In_An_IDictionary_With_A_Null_Action()
+        {
+            IDictionary<string, int> dictionary = NonEmptyDictionary();
+
+            dictionary
+                .Invoking(d => d.ForEach(null))
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("action"));
+        }
+        #endregion
+
+        #region ForEach with IReadOnlyDictionary<TKey, TValue> tests
+        [Test]
+        public void Test_ForEach_In_An_IReadOnlyDictionary()
+        {
+            IReadOnlyDictionary<string, int> expected = NonEmptyDictionary();
+            Dictionary<string, int> result = new Dictionary<string, int>();
+
+            expected.ForEach((k, v) =>
+            {
+                result.Should().NotContainKey(k, "Duplicate key/value pair iteration");
+                result[k] = v;
+            });
+
+            (result as IReadOnlyDictionary<string, int>).Should().Equal(expected);
+        }
+
+        [Test]
+        public void Test_ForEach_In_A_Null_IReadOnlyDictionary() => Null
+            .As<IReadOnlyDictionary<string, int>>()
+            .ForEach((k, v) => Fail("This should never be executed"));
+
+        [Test]
+        public void Test_ForEach_In_An_IReadOnlyDictionary_With_A_Null_Action()
+        {
+            IReadOnlyDictionary<string, int> dictionary = NonEmptyDictionary();
+
+            dictionary
+                .Invoking(d => d.ForEach(null))
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("action"));
+        }
+        #endregion
     }
 }
