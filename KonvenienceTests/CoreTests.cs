@@ -2,6 +2,8 @@
 using FluentAssertions;
 using NUnit.Framework;
 
+using static NUnit.Framework.Assert;
+
 namespace Konvenience
 {
     class CoreTests
@@ -18,15 +20,12 @@ namespace Konvenience
 
         [Test]
         public void Test_Using_Also_With_A_Null_Object()
-        {
-            string value = null;
-            var executed = false;
-
-            var result = value.Also(v => executed = true);
-
-            result.Should().BeNull();
-            executed.Should().BeTrue();
-        }
+            => Null
+                .As<object>()
+                .Invoking(o => o.Also(_ => Fail("This should never be executed")))
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("obj"));
 
         [Test]
         public void Test_Using_Also_With_A_Null_Argument()
@@ -55,18 +54,16 @@ namespace Konvenience
 
         [Test]
         public void Test_Using_Let_With_A_Null_Object()
-        {
-            string value = null;
-            var expected = "asdf";
-
-            var result = value.Let(v =>
-            {
-                v.Should().BeNull();
-                return expected;
-            });
-
-            result.Should().BeSameAs(expected);
-        }
+            => Null
+                .As<object>()
+                .Invoking(o => o.Let(_ =>
+                {
+                    Fail("This should never be executed");
+                    return Null.As<object>();
+                }))
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("obj"));
 
         [Test]
         public void Test_Using_Let_With_A_Null_Function()
@@ -100,6 +97,15 @@ namespace Konvenience
         }
 
         [Test]
+        public void Test_TakeReferenceIf_With_A_Null_Object()
+            => Null
+                .As<object>()
+                .Invoking(o => o.TakeReferenceIf(_ => true))
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("obj"));
+
+        [Test]
         public void Test_TakeReferenceIf_With_A_Null_Predicate()
         {
             var value = "asdf";
@@ -128,6 +134,15 @@ namespace Konvenience
 
             result.Should().BeSameAs(value);
         }
+
+        [Test]
+        public void Test_TakeReferenceUnless_With_A_Null_Object()
+            => Null
+                .As<object>()
+                .Invoking(o => o.TakeReferenceUnless(_ => true))
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("obj"));
 
         [Test]
         public void Test_TakeReferenceUnless_With_A_Null_Predicate()

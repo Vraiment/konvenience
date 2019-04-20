@@ -35,9 +35,10 @@ namespace Konvenience
         /// 
         /// <returns>The input object.</returns>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="obj"/> or <paramref name="action"/> are null.</exception>
         public static T Also<T>(this T obj, Action<T> action)
         {
+            Validate.ArgumentNotNull(obj, nameof(obj));
             Validate.ArgumentNotNull(action, nameof(action));
 
             action(obj);
@@ -57,9 +58,10 @@ namespace Konvenience
         /// 
         /// <returns>The result of executing the function with the input object.</returns>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="function"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="obj"/> or <paramref name="function"/> are null.</exception>
         public static TResult Let<T, TResult>(this T obj, Func<T, TResult> function)
         {
+            Validate.ArgumentNotNull(obj, nameof(obj));
             Validate.ArgumentNotNull(function, nameof(function));
 
             return function(obj);
@@ -86,9 +88,10 @@ namespace Konvenience
         /// 
         /// <returns>The input object if the predicate is true for it, null otherwise.</returns>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="obj"/> or <paramref name="predicate"/> are null.</exception>
         public static T TakeReferenceIf<T>(this T obj, Predicate<T> predicate) where T : class
         {
+            Validate.ArgumentNotNull(obj, nameof(obj));
             Validate.ArgumentNotNull(predicate, nameof(predicate));
 
             if (!predicate(obj))
@@ -112,9 +115,10 @@ namespace Konvenience
         /// 
         /// <returns>The input object if the predicate is false for it, null otherwise.</returns>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="predicate"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="obj"/> or <paramref name="predicate"/> are null.</exception>
         public static T TakeReferenceUnless<T>(this T obj, Predicate<T> predicate) where T : class
         {
+            Validate.ArgumentNotNull(obj, nameof(obj));
             Validate.ArgumentNotNull(predicate, nameof(predicate));
 
             if (predicate(obj))
