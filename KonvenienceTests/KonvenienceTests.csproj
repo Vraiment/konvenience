@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ForEachTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CoreTests.cs" />
     <Compile Include="DummyClass.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Konvenience\Konvenience.csproj">
