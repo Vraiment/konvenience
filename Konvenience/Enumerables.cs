@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Konvenience
 {
@@ -55,6 +56,60 @@ namespace Konvenience
 
             int index = 0;
             foreach (var value in array)
+            {
+                action(value, index++);
+            }
+        }
+        #endregion
+
+        #region IEnumerable<T> ForEach
+        /// <summary>
+        /// Executes <paramref name="action"/> in each element of <paramref name="enumerable"/>.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the objects enumerated by <paramref name="enumerable"/>.</typeparam>
+        /// 
+        /// <param name="enumerable">The objects that will be iterated over.</param>
+        /// <param name="action">The action that will be executed for each object.</param>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
+        {
+            Validate.ArgumentNotNull(action, nameof(action));
+
+            if (enumerable is null)
+            {
+                return;
+            }
+
+            foreach (var value in enumerable)
+            {
+                action(value);
+            }
+        }
+
+        /// <summary>
+        /// Executes <paramref name="action"/> in each element of <paramref name="enumerable"/>
+        /// along with its corresponding index.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the objects enumerated by <paramref name="enumerable"/>.</typeparam>
+        /// 
+        /// <param name="enumerable">The objects that will be iterated over.</param>
+        /// <param name="action">The action that will be executed for each object.</param>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T, int> action)
+        {
+            Validate.ArgumentNotNull(action, nameof(action));
+
+            if (enumerable is null)
+            {
+                return;
+            }
+
+            int index = 0;
+            foreach (var value in enumerable)
             {
                 action(value, index++);
             }
