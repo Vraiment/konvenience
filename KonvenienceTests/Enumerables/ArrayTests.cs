@@ -172,5 +172,40 @@ namespace Konvenience.Enumerables
                 .Where(e => e.Message.Contains("function"));
         }
         #endregion
+
+        #region IsEmpty/IsNotEmpty
+        public void Test_Emptiness_Of_A_Non_Empty_Array()
+        {
+            char[] array = SampleArray();
+
+            array.IsEmpty().Should().BeFalse();
+            array.IsNotEmpty().Should().BeTrue();
+        }
+
+        public void Test_Emptiness_Of_An_Empty_Array()
+        {
+            char[] array = Array.Empty<char>();
+
+            array.IsEmpty().Should().BeTrue();
+            array.IsNotEmpty().Should().BeFalse();
+        }
+
+        public void Test_Emptiness_Of_A_Null_Array()
+        {
+            char[] array = null;
+
+            array
+                .Invoking(a => a.IsEmpty())
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("array"));
+
+            array
+                .Invoking(a => a.IsNotEmpty())
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("array"));
+        }
+        #endregion
     }
 }

@@ -450,5 +450,135 @@ namespace Konvenience
             }
         }
         #endregion
+
+        #region Emptiness
+        /// <summary>
+        /// Checks if <paramref name="array"/> is empty.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in <paramref name="array"/>.</typeparam>
+        /// 
+        /// <param name="array">The array to check.</param>
+        /// 
+        /// <returns>True if <paramref name="array"/> is empty, false otherwise.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="array"/> is null.</exception>
+        public static bool IsEmpty<T>(this T[] array)
+        {
+            Validate.ArgumentNotNull(array, nameof(array));
+
+            return array.Length == 0;
+        }
+
+        /// <summary>
+        /// Checks if <paramref name="array"/> is not empty.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in <paramref name="array"/>.</typeparam>
+        /// 
+        /// <param name="array">The array to check.</param>
+        /// 
+        /// <returns>True if <paramref name="array"/> is not empty, false otherwise.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="array"/> is null.</exception>
+        public static bool IsNotEmpty<T>(this T[] array)
+            => !IsEmpty(array);
+
+        /// <summary>
+        /// Checks if <paramref name="enumerable"/> is empty.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in <paramref name="enumerable"/>.</typeparam>
+        /// 
+        /// <param name="enumerable">The enumeration of objects to check.</param>
+        /// 
+        /// <returns>True if <paramref name="enumerable"/> is empty, false otherwise.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="enumerable"/> is null.</exception>
+        public static bool IsEmpty<T>(this IEnumerable<T> enumerable)
+        {
+            Validate.ArgumentNotNull(enumerable, nameof(enumerable));
+
+            return enumerable.Count() == 0;
+        }
+
+        /// <summary>
+        /// Checks if <paramref name="enumerable"/> is not empty.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in <paramref name="enumerable"/>.</typeparam>
+        /// 
+        /// <param name="enumerable">The enumeration of objects to check.</param>
+        /// 
+        /// <returns>True if <paramref name="enumerable"/> is not empty, false otherwise.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="enumerable"/> is null.</exception>
+        public static bool IsNotEmpty<T>(this IEnumerable<T> enumerable)
+            => !IsEmpty(enumerable);
+
+        /// <summary>
+        /// Checks if <paramref name="collection"/> is empty.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in <paramref name="collection"/>.</typeparam>
+        /// 
+        /// <param name="collection">The collection of elements to check.</param>
+        /// 
+        /// <returns>True if <paramref name="collection"/> is empty, false otherwise.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is null.</exception>
+        public static bool IsEmpty<T>(this ICollection<T> collection)
+        {
+            Validate.ArgumentNotNull(collection, nameof(collection));
+
+            return collection.Count == 0;
+        }
+
+        /// <summary>
+        /// Checks if <paramref name="collection"/> is not empty.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in <paramref name="collection"/>.</typeparam>
+        /// 
+        /// <param name="collection">The collection of elements to check.</param>
+        /// 
+        /// <returns>True if <paramref name="collection"/> is not empty, false otherwise.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is null.</exception>
+        public static bool IsNotEmpty<T>(this ICollection<T> collection)
+            => !IsEmpty(collection);
+
+        /// <summary>
+        /// Checks if <paramref name="collection"/> is empty.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in <paramref name="collection"/>.</typeparam>
+        /// 
+        /// <param name="collection">The collection of elements to check.</param>
+        /// 
+        /// <returns>True if <paramref name="collection"/> is empty, false otherwise.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is null.</exception>
+        public static bool IsEmpty<T>(this IReadOnlyCollection<T> collection)
+        {
+            Validate.ArgumentNotNull(collection, nameof(collection));
+
+            return collection.Count == 0;
+        }
+
+        /// <summary>
+        /// Checks if <paramref name="collection"/> is not empty.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">The type of the elements in <paramref name="collection"/>.</typeparam>
+        /// 
+        /// <param name="collection">The collection of elements to check.</param>
+        /// 
+        /// <returns>True if <paramref name="collection"/> is not empty, false otherwise.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is null.</exception>
+        public static bool IsNotEmpty<T>(this IReadOnlyCollection<T> collection)
+            => !IsEmpty(collection);
+        #endregion
     }
 }

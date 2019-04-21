@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerables\ArrayTests.cs" />
+    <Compile Include="Enumerables\ICollectionTests.cs" />
     <Compile Include="Enumerables\IDictionaryTests.cs" />
     <Compile Include="Enumerables\IEnumerableTests.cs" />
     <Compile Include="Enumerables\IListTests.cs" />

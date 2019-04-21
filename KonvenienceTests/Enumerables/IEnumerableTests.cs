@@ -172,5 +172,43 @@ namespace Konvenience.Enumerables
                 .Throw<ArgumentException>()
                 .Where(e => e.Message.Contains("function"));
         #endregion
+
+        #region IsEmpty/IsNotEmpty
+        [Test]
+        public void Test_Emptiness_Of_A_Non_Empty_IEnumerable()
+        {
+            IEnumerable<char> enumerable = Enumerable.For(SampleArray());
+
+            enumerable.IsEmpty().Should().BeFalse();
+            enumerable.IsNotEmpty().Should().BeTrue();
+        }
+
+        [Test]
+        public void Test_Emptiness_Of_An_Empty_IEnumerable()
+        {
+            IEnumerable<char> enumerable = Enumerable.For<char>();
+
+            enumerable.IsEmpty().Should().BeTrue();
+            enumerable.IsNotEmpty().Should().BeFalse();
+        }
+
+        [Test]
+        public void Test_Emptiness_Of_A_Null_IEnumerable()
+        {
+            IEnumerable<char> enumerable = null;
+
+            enumerable
+                .Invoking(a => a.IsEmpty())
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("enumerable"));
+
+            enumerable
+                .Invoking(a => a.IsNotEmpty())
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("enumerable"));
+        }
+        #endregion
     }
 }
