@@ -211,6 +211,8 @@ namespace Konvenience
         /// <param name="value">The value to return if <paramref name="index"/> is not valid.</param>
         /// 
         /// <returns>The value at <paramref name="index"/> or <paramref name="value"/> if the index is not valid.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="array"/> is null.</exception>
         public static T GetOrElse<T>(this T[] array, int index, T value)
             => GetOrElse(array, index, () => value);
 
@@ -226,9 +228,14 @@ namespace Konvenience
         /// <param name="function">The function that will generate the value if <paramref name="index"/> is out of bounds.</param>
         /// 
         /// <returns>The value at <paramref name="index"/> or the result of <paramref name="function"/> if the index is not valid.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="array"/> or <paramref name="function"/> are null.</exception>
         public static T GetOrElse<T>(this T[] array, int index, Func<T> function)
         {
-            if (array != null && 0 <= index && index <= array.Length - 1)
+            Validate.ArgumentNotNull(array, nameof(array));
+            Validate.ArgumentNotNull(function, nameof(function));
+
+            if (0 <= index && index <= array.Length - 1)
             {
                 return array[index];
             }
@@ -273,6 +280,8 @@ namespace Konvenience
         /// <param name="value">The value to return if <paramref name="index"/> is not valid.</param>
         /// 
         /// <returns>The value at <paramref name="index"/> or <paramref name="value"/> if the index is not valid.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="enumerable"/> is null.</exception>
         public static T GetOrElse<T>(this IEnumerable<T> enumerable, int index, T value)
             => GetOrElse(enumerable, index, () => value);
 
@@ -288,9 +297,14 @@ namespace Konvenience
         /// <param name="function">The function that will generate the value if <paramref name="index"/> is out of bounds.</param>
         /// 
         /// <returns>The value at <paramref name="index"/> or the result of <paramref name="function"/> if the index is not valid.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="enumerable"/> or <paramref name="function"/> are null.</exception>
         public static T GetOrElse<T>(this IEnumerable<T> enumerable, int index, Func<T> function)
         {
-            if (enumerable != null && 0 <= index && index <= enumerable.Count() - 1)
+            Validate.ArgumentNotNull(enumerable, nameof(enumerable));
+            Validate.ArgumentNotNull(function, nameof(function));
+
+            if (0 <= index && index <= enumerable.Count() - 1)
             {
                 return enumerable.ElementAt(index);
             }
@@ -335,6 +349,8 @@ namespace Konvenience
         /// <param name="value">The value to return if <paramref name="index"/> is not valid.</param>
         /// 
         /// <returns>The value at <paramref name="index"/> or <paramref name="value"/> if the index is not valid.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="list"/> is null.</exception>
         public static T GetOrElse<T>(this IList<T> list, int index, T value)
             => GetOrElse(list, index, () => value);
 
@@ -350,9 +366,14 @@ namespace Konvenience
         /// <param name="function">The function that will generate the value if <paramref name="index"/> is out of bounds.</param>
         /// 
         /// <returns>The value at <paramref name="index"/> or the result of <paramref name="function"/> if the index is not valid.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="list"/> or <paramref name="function"/> are null.</exception>
         public static T GetOrElse<T>(this IList<T> list, int index, Func<T> function)
         {
-            if (list != null && 0 <= index && index <= list.Count - 1)
+            Validate.ArgumentNotNull(list, nameof(list));
+            Validate.ArgumentNotNull(function, nameof(function));
+
+            if (0 <= index && index <= list.Count - 1)
             {
                 return list[index];
             }
@@ -395,6 +416,8 @@ namespace Konvenience
         /// <param name="value">The value to return if <paramref name="index"/> is not valid.</param>
         /// 
         /// <returns>The value at <paramref name="index"/> or <paramref name="value"/> if the index is not valid.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="list"/> is null.</exception>
         public static T GetOrElse<T>(this IReadOnlyList<T> list, int index, T value)
             => GetOrElse(list, index, () => value);
 
@@ -410,9 +433,14 @@ namespace Konvenience
         /// <param name="function">The function that will generate the value if <paramref name="index"/> is out of bounds.</param>
         /// 
         /// <returns>The value at <paramref name="index"/> or the result of <paramref name="function"/> if the index is not valid.</returns>
+        /// 
+        /// <exception cref="ArgumentNullException">If <paramref name="list"/> or <paramref name="function"/> are null.</exception>
         public static T GetOrElse<T>(this IReadOnlyList<T> list, int index, Func<T> function)
         {
-            if (list != null && 0 <= index && index <= list.Count - 1)
+            Validate.ArgumentNotNull(list, nameof(list));
+            Validate.ArgumentNotNull(function, nameof(function));
+
+            if (0 <= index && index <= list.Count - 1)
             {
                 return list[index];
             }
