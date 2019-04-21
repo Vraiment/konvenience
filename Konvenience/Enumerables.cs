@@ -250,9 +250,7 @@ namespace Konvenience
         public static T Get<T>(this IEnumerable<T> enumerable, int index)
         {
             Validate.ArgumentNotNull(enumerable, nameof(enumerable));
-
-            int count = enumerable.Count();
-            Validate.ArgumentInRange(index, nameof(index), 0, count);
+            Validate.ArgumentInRange(index, nameof(index), 0, enumerable.Count() - 1);
 
             return enumerable.ElementAt(index);
         }

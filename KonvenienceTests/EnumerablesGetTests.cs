@@ -28,7 +28,7 @@ namespace Konvenience
             char[] array = NonEmptyArray();
 
             array
-                .Invoking(a => a.Get(-1))
+                .Invoking(a => a.Get(array.Length))
                 .Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .Where(e => e.Message.Contains("index"));
@@ -58,7 +58,7 @@ namespace Konvenience
         {
             char[] array = NonEmptyArray();
 
-            array.GetOrElse(-1, 'z')
+            array.GetOrElse(array.Length, 'z')
                 .Should()
                 .Be('z');
         }
@@ -86,7 +86,7 @@ namespace Konvenience
         {
             char[] array = NonEmptyArray();
 
-            array.GetOrElse(-1, () => 'z')
+            array.GetOrElse(array.Length, () => 'z')
                 .Should()
                 .Be('z');
         }
@@ -115,7 +115,7 @@ namespace Konvenience
         [Test]
         public void Test_Get_An_Invalid_Index_In_An_IEnumerable()
             => Enumerable.For<char>()
-                .Invoking(a => a.Get(-1))
+                .Invoking(a => a.Get(0))
                 .Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .Where(e => e.Message.Contains("index"));
@@ -146,7 +146,7 @@ namespace Konvenience
             char[] array = NonEmptyArray();
             IEnumerable<char> enumerable = Enumerable.For(array);
 
-            enumerable.GetOrElse(-1, 'z')
+            enumerable.GetOrElse(array.Length, 'z')
                 .Should()
                 .Be('z');
         }
@@ -176,7 +176,7 @@ namespace Konvenience
             char[] array = NonEmptyArray();
             IEnumerable<char> enumerable = Enumerable.For(array);
 
-            enumerable.GetOrElse(-1, () => 'z')
+            enumerable.GetOrElse(array.Length, () => 'z')
                 .Should()
                 .Be('z');
         }
@@ -210,7 +210,7 @@ namespace Konvenience
             IList<char> list = NonEmptyList();
 
             list
-                .Invoking(a => a.Get(-1))
+                .Invoking(a => a.Get(list.Count))
                 .Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .Where(e => e.Message.Contains("index"));
@@ -240,7 +240,7 @@ namespace Konvenience
         {
             IList<char> list = NonEmptyList();
 
-            list.GetOrElse(-1, 'z')
+            list.GetOrElse(list.Count, 'z')
                 .Should()
                 .Be('z');
         }
@@ -268,7 +268,7 @@ namespace Konvenience
         {
             IList<char> list = NonEmptyList();
 
-            list.GetOrElse(-1, () => 'z')
+            list.GetOrElse(list.Count, () => 'z')
                 .Should()
                 .Be('z');
         }
@@ -299,7 +299,7 @@ namespace Konvenience
             IReadOnlyList<char> list = NonEmptyList();
 
             list
-                .Invoking(a => a.Get(-1))
+                .Invoking(a => a.Get(list.Count))
                 .Should()
                 .Throw<ArgumentOutOfRangeException>()
                 .Where(e => e.Message.Contains("index"));
@@ -329,7 +329,7 @@ namespace Konvenience
         {
             IReadOnlyList<char> list = NonEmptyList();
 
-            list.GetOrElse(-1, 'z')
+            list.GetOrElse(list.Count, 'z')
                 .Should()
                 .Be('z');
         }
@@ -357,7 +357,7 @@ namespace Konvenience
         {
             IReadOnlyList<char> list = NonEmptyList();
 
-            list.GetOrElse(-1, () => 'z')
+            list.GetOrElse(list.Count, () => 'z')
                 .Should()
                 .Be('z');
         }
