@@ -19,9 +19,10 @@ namespace Konvenience
         /// <param name="array">The arrray to be iterated over.</param>
         /// <param name="action">The action that will be executed for each array element.</param>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="array"/> or <paramref name="action"/> are null.</exception>
         public static void ForEach<T>(this T[] array, Action<T> action)
         {
+            Validate.ArgumentNotNull(array, nameof(array));
             Validate.ArgumentNotNull(action, nameof(action));
 
             if (array is null)
@@ -45,9 +46,10 @@ namespace Konvenience
         /// <param name="array">The arrray to be iterated over.</param>
         /// <param name="action">The action that will be executed for each array element.</param>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="array"/> or <paramref name="action"/> are null.</exception>
         public static void ForEach<T>(this T[] array, Action<T, int> action)
         {
+            Validate.ArgumentNotNull(array, nameof(array));
             Validate.ArgumentNotNull(action, nameof(action));
 
             if (array is null)
@@ -73,9 +75,10 @@ namespace Konvenience
         /// <param name="enumerable">The objects that will be iterated over.</param>
         /// <param name="action">The action that will be executed for each object.</param>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="enumerable"/> or <paramref name="action"/> are null.</exception>
         public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
+            Validate.ArgumentNotNull(enumerable, nameof(enumerable));
             Validate.ArgumentNotNull(action, nameof(action));
 
             if (enumerable is null)
@@ -99,9 +102,10 @@ namespace Konvenience
         /// <param name="enumerable">The objects that will be iterated over.</param>
         /// <param name="action">The action that will be executed for each object.</param>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="enumerable"/> or <paramref name="action"/> are null.</exception>
         public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T, int> action)
         {
+            Validate.ArgumentNotNull(enumerable, nameof(enumerable));
             Validate.ArgumentNotNull(action, nameof(action));
 
             if (enumerable is null)
@@ -128,9 +132,10 @@ namespace Konvenience
         /// <param name="dictionary">The objects that will be iterated over.</param>
         /// <param name="action">The action that will be executed for each object.</param>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="dictionary"/> or <paramref name="action"/> are null.</exception>
         public static void ForEach<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, Action<TKey, TValue> action)
         {
+            Validate.ArgumentNotNull(dictionary, nameof(dictionary));
             Validate.ArgumentNotNull(action, nameof(action));
 
             if (dictionary is null)
@@ -154,9 +159,10 @@ namespace Konvenience
         /// <param name="dictionary">The objects that will be iterated over.</param>
         /// <param name="action">The action that will be executed for each object.</param>
         /// 
-        /// <exception cref="ArgumentNullException">If <paramref name="action"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="dictionary"/> or <paramref name="action"/> are null.</exception>
         public static void ForEach<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, Action<TKey, TValue> action)
         {
+            Validate.ArgumentNotNull(dictionary, nameof(dictionary));
             Validate.ArgumentNotNull(action, nameof(action));
 
             if (dictionary is null)

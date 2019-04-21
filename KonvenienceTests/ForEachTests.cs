@@ -37,13 +37,19 @@ namespace Konvenience
         [Test]
         public void Test_ForEach_In_A_Null_Array() => Null
             .As<char[]>()
-            .ForEach(e => Fail("This should never be executed"));
+            .Invoking(a => a.ForEach(_ => Fail("This should never be executed")))
+            .Should()
+            .Throw<ArgumentNullException>()
+            .Where(e => e.Message.Contains("array"));
 
         [Test]
         public void Test_ForEach_With_Index_In_A_Null_Array()
             => Null
                 .As<char[]>()
-                .ForEach((e, i) => Fail("This should never be executed"));
+                .Invoking(a => a.ForEach((_, i) => Fail("This should never be executed")))
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("array"));
 
         [Test]
         public void Test_ForEach_In_An_Array_With_A_Null_Action()
@@ -90,13 +96,19 @@ namespace Konvenience
         [Test]
         public void Test_ForEach_In_A_Null_IEnumerable() => Null
             .As<IEnumerable<char>>()
-            .ForEach(e => Fail("This should never be executed"));
+            .Invoking(e => e.ForEach(_ => Fail("This should never be executed")))
+            .Should()
+            .Throw<ArgumentNullException>()
+            .Where(e => e.Message.Contains("enumerable"));
 
         [Test]
         public void Test_ForEach_With_Index_In_A_Null_IEnumerable()
             => Null
                 .As<IEnumerable<char>>()
-                .ForEach((e, i) => Fail("This should never be executed"));
+                .Invoking(e => e.ForEach((_, i) => Fail("This should never be executed")))
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(e => e.Message.Contains("enumerable"));
 
         [Test]
         public void Test_ForEach_In_An_IEnumerable_With_A_Null_Action()
@@ -141,7 +153,10 @@ namespace Konvenience
         [Test]
         public void Test_ForEach_In_A_Null_IDictionary() => Null
             .As<IDictionary<string, int>>()
-            .ForEach((k, v) => Fail("This should never be executed"));
+            .Invoking(d => d.ForEach((k, v) => Fail("This should never be executed")))
+            .Should()
+            .Throw<ArgumentNullException>()
+            .Where(e => e.Message.Contains("dictionary"));
 
         [Test]
         public void Test_ForEach_In_An_IDictionary_With_A_Null_Action()
@@ -175,7 +190,10 @@ namespace Konvenience
         [Test]
         public void Test_ForEach_In_A_Null_IReadOnlyDictionary() => Null
             .As<IReadOnlyDictionary<string, int>>()
-            .ForEach((k, v) => Fail("This should never be executed"));
+            .Invoking(d => d.ForEach((k, v) => Fail("This should never be executed")))
+            .Should()
+            .Throw<ArgumentNullException>()
+            .Where(e => e.Message.Contains("dictionary"));
 
         [Test]
         public void Test_ForEach_In_An_IReadOnlyDictionary_With_A_Null_Action()
