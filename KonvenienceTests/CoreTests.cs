@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -213,5 +214,33 @@ namespace Konvenience
                 .Should()
                 .Throw<ArgumentNullException>();
         }
+
+        [Test]
+        public void Test_Safe_Casting_An_Object_To_A_Valid_Type()
+        {
+            string value = "value";
+
+            value
+                .As<IEnumerable<char>>()
+                .Should()
+                .BeSameAs(value);
+        }
+
+        [Test]
+        public void Test_Safe_Casting_An_Object_To_An_Invalid_Type()
+        {
+            string value = "value";
+
+            value
+                .As<IList<char>>()
+                .Should()
+                .BeNull();
+        }
+
+        [Test]
+        public void Test_Safe_Casting_Null() => Core
+            .As<IList<char>>(Null.As<string>())
+            .Should()
+            .BeNull();
     }
 }

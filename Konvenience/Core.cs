@@ -180,5 +180,19 @@ namespace Konvenience
 
             return obj;
         }
+
+        /// <summary>
+        /// Performs a safe cast (with the "as" operator) on <paramref name="obj"/> to the type <typeparamref name="T"/>.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">Type that the object will be casted to.</typeparam>
+        /// 
+        /// <param name="obj">The object to cast.</param>
+        /// 
+        /// <returns><paramref name="obj"/> cast to T if such cast is possible, null otherwise.</returns>
+        public static T As<T>(this object obj) where T : class
+        {
+            return obj as T;
+        }
     }
 }
