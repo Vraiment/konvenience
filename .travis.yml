@@ -1,8 +1,12 @@
-language: csharp
+language: bash
 solution: Konvenience.sln
+os: windows
+env:
+  - MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
 install:
+  - choco install nuget.commandline
   - nuget restore Konvenience.sln
-  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
-  - msbuild /p:Configuration=Release Konvenience.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./KonvenienceTests/bin/Release/KonvenienceTests.dll
+  - export PATH=$MSBUILD_PATH:$PATH
+  - MSBuild.exe -p:Configuration=Release Konvenience.sln
+  - packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./KonvenienceTests/bin/Release/KonvenienceTests.dll
