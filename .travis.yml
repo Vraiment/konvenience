@@ -10,3 +10,11 @@ script:
   - export PATH=$MSBUILD_PATH:$PATH
   - MSBuild.exe -p:Configuration=Release Konvenience.sln
   - packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./KonvenienceTests/bin/Release/KonvenienceTests.dll
+  - nuget pack Konvenience/.nuspec
+deploy:
+  provider: releases
+  api_key: $API_KEY
+  file: Konvenience.$TRAVIS_TAG.nupkg
+  skip_cleanup: true
+  on:
+    tags: true
